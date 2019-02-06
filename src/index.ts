@@ -54,7 +54,7 @@ window.onload = () => {
 
   gl.drawElements(
     gl.TRIANGLES,
-    hexagon.indices.flat().length,
+    buff.count,
     gl.UNSIGNED_SHORT,
     0
   );
