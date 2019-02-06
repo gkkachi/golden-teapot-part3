@@ -4,27 +4,21 @@ export interface MyObject {
 }
 
 export interface Buffers {
-  vbo: WebGLRenderbuffer;
-  ibo: WebGLRenderbuffer;
+  vbo: WebGLRenderbuffer | null;
+  ibo: WebGLRenderbuffer | null;
   count: number;
 }
 
 export function getBuffers(
   gl: WebGLRenderingContext,
   obj: MyObject
-): Buffers | null {
-  const _vbo = gl.createBuffer();
-  const _ibo = gl.createBuffer();
-  if (!_vbo || !_ibo) {
-    return null;
-  }
-
+): Buffers {
   const flatten_vertices = flatten(obj.vertices);
   const flatten_indices = flatten(obj.indices);
 
   const buff: Buffers = {
-    vbo: _vbo as WebGLBuffer,
-    ibo: _ibo as WebGLBuffer,
+    vbo: gl.createBuffer(),
+    ibo: gl.createBuffer(),
     count: flatten_indices.length
   };
 

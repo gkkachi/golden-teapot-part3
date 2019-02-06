@@ -1,4 +1,4 @@
-import { getBuffers, Buffers } from "./MyObject";
+import { getBuffers } from "./MyObject";
 import { getHexagon } from "./hexagon";
 
 import imageURL from "./assets/images/theta360me.jpg";
@@ -75,12 +75,7 @@ window.onload = () => {
   gl.enableVertexAttribArray(location_xy);
 
   const hexagon = getHexagon(16);
-  const _buff = getBuffers(gl, hexagon);
-  if (!_buff) {
-    console.log("ERROR: failed to create a buffer.");
-    return;
-  }
-  const buff = _buff as Buffers;
+  const buff = getBuffers(gl, hexagon);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, buff.vbo);
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buff.ibo);
