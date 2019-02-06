@@ -1,4 +1,3 @@
-import { getBuffers } from "./MyObject";
 import { getHexagon } from "./hexagon";
 
 import imageURL from "./assets/images/theta360me.jpg";
@@ -74,11 +73,8 @@ window.onload = () => {
   const location_xy = gl.getAttribLocation(program, "xy");
   gl.enableVertexAttribArray(location_xy);
 
-  const hexagon = getHexagon(16);
-  const buff = getBuffers(gl, hexagon);
-
-  gl.bindBuffer(gl.ARRAY_BUFFER, buff.vbo);
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buff.ibo);
+  const hexagon = getHexagon(gl, 16);
+  hexagon.bind();
   gl.vertexAttribPointer(location_xy, 2, gl.FLOAT, false, 0, 0);
 
   const location_t = gl.getUniformLocation(program, "texture");
@@ -86,7 +82,7 @@ window.onload = () => {
   updateTexture(imageURL);
 
   setInterval(() => {
-    gl.drawElements(gl.TRIANGLES, buff.count, gl.UNSIGNED_SHORT, 0);
+    hexagon.draw();
     gl.flush();
   }, 1000);
 

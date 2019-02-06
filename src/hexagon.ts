@@ -1,10 +1,10 @@
 import { MyObject } from "./MyObject";
 
-export function getHexagon(length: number): MyObject {
-  return {
-    vertices: getVertices(length),
-    indices: getIndicese(length)
-  };
+export function getHexagon(
+  gl: WebGLRenderingContext,
+  length: number
+): MyObject {
+  return new MyObject(gl, getVertices(length), getIndicese(length))
 }
 
 function getVertices(length: number): number[][] {
